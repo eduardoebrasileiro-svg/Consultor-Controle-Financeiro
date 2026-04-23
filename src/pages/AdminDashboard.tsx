@@ -103,7 +103,7 @@ export const AdminDashboard: React.FC = () => {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
                 <h3 className="text-3xl font-black tracking-tighter text-white">Central de Supervisão</h3>
-                <p className="text-olive-500 font-bold uppercase text-[10px] tracking-[0.2em] mt-1">Gestão de Subordinados FinLink</p>
+                <p className="text-olive-500 font-bold uppercase text-[10px] tracking-[0.2em] mt-1">Gestão de Operações ESTRATÉGIA</p>
               </div>
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-olive-500" />

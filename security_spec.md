@@ -1,4 +1,4 @@
-# Security Specification - Finanças Pro
+# Security Specification - ESTRATÉGIA CONSULTORIA
 
 ## Data Invariants
 - A transaction must have a valid `userId`.

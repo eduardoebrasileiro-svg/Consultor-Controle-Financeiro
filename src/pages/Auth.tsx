@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LogIn, Wallet, Mail, Lock, User, ShieldCheck, ArrowRight } from 'lucide-react';
+import { LogIn, Star, Mail, Lock, User, ShieldCheck, ArrowRight } from 'lucide-react';
 import { 
   auth, 
   db, 
@@ -56,25 +56,27 @@ export const Auth: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F4] flex items-center justify-center p-6 font-sans">
+    <div className="min-h-screen bg-olive-950 flex items-center justify-center p-6 font-sans">
       <motion.div 
         layout
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-md w-full bg-white rounded-[2.5rem] p-10 shadow-2xl shadow-olive-100/50 border border-[#E5E5E5]"
+        className="max-w-md w-full bg-olive-900 rounded-[3rem] p-12 shadow-2xl border border-olive-800 relative overflow-hidden"
       >
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-[#1A1A1A] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
-            <Wallet className="text-white w-8 h-8" />
+        <div className="text-center mb-8 relative z-10">
+          <div className="w-20 h-20 bg-olive-950 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl border border-olive-800 transition-transform hover:scale-105">
+            <svg viewBox="0 0 24 24" className="w-10 h-10 text-yellow-400 fill-yellow-400 filter drop-shadow-[0_0_8px_rgba(250,204,21,0.4)]">
+              <path d="M12 1L14.39 8.26H22L15.81 12.75L18.19 20L12 15.5L5.81 20L8.19 12.75L2 8.26H9.61L12 1Z" />
+            </svg>
           </div>
-          <h1 className="text-3xl font-black tracking-tight text-[#1A1A1A] mb-2 uppercase italic">
-            {mode === 'login' ? 'Bem-vindo de volta' : 'Crie sua conta'}
+          <h1 className="text-2xl font-black tracking-[0.2em] text-white mb-2 uppercase italic text-center">
+            ESTRATÉGIA
+            <span className="block text-[10px] tracking-[0.4em] text-olive-500 font-medium not-italic mt-1">CONSULTORIA</span>
           </h1>
-          <p className="text-[#666] text-sm">
-            {mode === 'login' 
-              ? 'Acesse sua inteligência financeira agora.' 
-              : 'Comece sua jornada para a liberdade financeira.'}
-          </p>
+          <div className="h-px w-12 bg-yellow-400/30 mx-auto my-4"></div>
+          <h2 className="text-xs font-black text-olive-400 uppercase tracking-widest">
+            {mode === 'login' ? 'Identificação Requerida' : 'Registro de Operador'}
+          </h2>
         </div>
 
         {error && (
@@ -99,12 +101,12 @@ export const Auth: React.FC = () => {
                 className="space-y-4 overflow-hidden"
               >
                 <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-olive-400" />
+                  <User className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-olive-600" />
                   <input
                     type="text"
-                    placeholder="Seu nome completo"
+                    placeholder="NOME COMPLETO"
                     required
-                    className="w-full bg-[#FAFAFA] border border-[#EEEEEE] py-4 pl-12 pr-4 rounded-2xl focus:border-[#1A1A1A] outline-none transition-all font-bold text-sm"
+                    className="w-full bg-olive-950 border border-olive-800 py-5 pl-14 pr-6 rounded-2xl focus:border-yellow-400/50 outline-none transition-all font-bold text-xs text-white placeholder:text-olive-800 tracking-widest"
                     value={displayName}
                     onChange={(e) => setDisplayName(e.target.value)}
                   />
@@ -114,54 +116,51 @@ export const Auth: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setRole('user')}
-                    className={`p-4 rounded-2xl border-2 transition-all flex flex-col items-center gap-2 ${
+                    className={`p-5 rounded-2xl border-2 transition-all flex flex-col items-center gap-3 ${
                       role === 'user' 
-                        ? 'border-[#1A1A1A] bg-[#1A1A1A] text-white' 
-                        : 'border-[#EEEEEE] text-olive-400 hover:border-olive-300'
+                        ? 'border-olive-500 bg-olive-500/10 text-white' 
+                        : 'border-olive-800 text-olive-700 hover:border-olive-600'
                     }`}
                   >
-                    <User className="w-6 h-6" />
+                    <User className="w-5 h-5" />
                     <span className="text-[10px] font-black uppercase tracking-widest">Usuário</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => setRole('admin')}
-                    className={`p-4 rounded-2xl border-2 transition-all flex flex-col items-center gap-2 ${
+                    className={`p-5 rounded-2xl border-2 transition-all flex flex-col items-center gap-3 ${
                       role === 'admin' 
-                        ? 'border-olive-600 bg-olive-600 text-white shadow-lg shadow-olive-900/20' 
-                        : 'border-[#EEEEEE] text-olive-400 hover:border-olive-300'
+                        ? 'border-olive-500 bg-olive-500/10 text-white' 
+                        : 'border-olive-800 text-olive-700 hover:border-olive-600'
                     }`}
                   >
-                    <ShieldCheck className="w-6 h-6" />
-                    <span className="text-[10px] font-black uppercase tracking-widest">Administrador</span>
+                    <ShieldCheck className="w-5 h-5" />
+                    <span className="text-[10px] font-black uppercase tracking-widest">Supervisor</span>
                   </button>
                 </div>
-                <p className="text-[10px] text-olive-400 text-center font-bold px-4">
-                  * Administradores podem gerenciar usuários e planejar orçamentos globais.
-                </p>
               </motion.div>
             )}
           </AnimatePresence>
 
           <div className="relative">
-            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-olive-400" />
+            <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-olive-600" />
             <input
               type="email"
-              placeholder="E-mail"
+              placeholder="E-MAIL INSTITUCIONAL"
               required
-              className="w-full bg-[#FAFAFA] border border-[#EEEEEE] py-4 pl-12 pr-4 rounded-2xl focus:border-[#1A1A1A] outline-none transition-all font-bold text-sm"
+              className="w-full bg-olive-950 border border-olive-800 py-5 pl-14 pr-6 rounded-2xl focus:border-yellow-400/50 outline-none transition-all font-bold text-xs text-white placeholder:text-olive-800 tracking-widest"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
           <div className="relative">
-            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-olive-400" />
+            <Lock className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-olive-600" />
             <input
               type="password"
-              placeholder="Senha"
+              placeholder="CRIPTO-SENHA"
               required
-              className="w-full bg-[#FAFAFA] border border-[#EEEEEE] py-4 pl-12 pr-4 rounded-2xl focus:border-[#1A1A1A] outline-none transition-all font-bold text-sm"
+              className="w-full bg-olive-950 border border-olive-800 py-5 pl-14 pr-6 rounded-2xl focus:border-yellow-400/50 outline-none transition-all font-bold text-xs text-white placeholder:text-olive-800 tracking-widest"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -170,43 +169,45 @@ export const Auth: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#1A1A1A] text-white py-4 rounded-2xl font-bold text-lg hover:bg-black transition-all shadow-xl shadow-black/10 flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-50"
+            className="w-full bg-olive-600 text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] hover:bg-olive-500 transition-all shadow-xl shadow-olive-950/50 flex items-center justify-center gap-3 active:scale-[0.98] disabled:opacity-50"
           >
             {loading ? (
-              <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
             ) : (
               <>
-                {mode === 'login' ? 'Entrar' : 'Cadastrar'}
-                <ArrowRight className="w-5 h-5" />
+                {mode === 'login' ? 'Acessar Terminal' : 'Efetuar Cadastro'}
+                <ArrowRight className="w-4 h-4" />
               </>
             )}
           </button>
         </form>
 
-        <div className="mt-8 flex items-center gap-4">
-          <div className="h-[1px] bg-[#EEEEEE] flex-1" />
-          <span className="text-[10px] font-black text-olive-400 uppercase tracking-widest">Ou continue com</span>
-          <div className="h-[1px] bg-[#EEEEEE] flex-1" />
+        <div className="mt-10 flex items-center gap-4 relative z-10">
+          <div className="h-px bg-olive-800 flex-1" />
+          <span className="text-[8px] font-black text-olive-700 uppercase tracking-[0.3em]">Autenticação Externa</span>
+          <div className="h-px bg-olive-800 flex-1" />
         </div>
 
         <button
           onClick={signInWithGoogle}
-          className="w-full mt-8 flex items-center justify-center gap-4 bg-white border border-[#EEEEEE] py-4 rounded-2xl hover:bg-[#FAFAFA] transition-all group font-bold text-sm text-[#1A1A1A]"
+          className="w-full mt-8 flex items-center justify-center gap-4 bg-olive-950 border border-olive-800 py-5 rounded-2xl hover:bg-olive-800 transition-all group font-black text-[10px] text-white uppercase tracking-widest"
         >
-          <img src="https://www.google.com/favicon.ico" alt="Google" className="w-5 h-5 grayscale group-hover:grayscale-0 transition-all" />
-          Google
+          <img src="https://www.google.com/favicon.ico" alt="Google" className="w-4 h-4 grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all" />
+          Google Account
         </button>
 
-        <p className="mt-8 text-center text-sm text-[#888]">
-          {mode === 'login' ? 'Não tem uma conta?' : 'Já tem uma conta?'}
+        <p className="mt-10 text-center text-[10px] text-olive-600 font-bold uppercase tracking-widest leading-tight">
+          {mode === 'login' ? 'Sem credenciais de acesso?' : 'Já possui registro no sistema?'}
           <button 
             type="button"
             onClick={() => setMode(mode === 'login' ? 'register' : 'login')}
-            className="ml-2 text-[#1A1A1A] font-bold hover:underline"
+            className="ml-2 text-white hover:text-yellow-400 transition-colors"
           >
-            {mode === 'login' ? 'Cadastre-se' : 'Fazer login'}
+            {mode === 'login' ? 'SOLICITAR ACESSO' : 'VOLTAR AO TERMINAL'}
           </button>
         </p>
+
+        <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-olive-600/5 rounded-full blur-3xl pointer-events-none"></div>
       </motion.div>
     </div>
   );

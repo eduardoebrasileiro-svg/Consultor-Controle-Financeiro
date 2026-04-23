@@ -7,7 +7,7 @@ import {
   Calendar, 
   Users, 
   LogOut, 
-  Wallet,
+  Star,
   Settings,
   Bell,
   Target,
@@ -40,11 +40,19 @@ export const Shell: React.FC<ShellProps> = ({ children, activeTab, setActiveTab 
       {/* Sidebar */}
       <aside className="w-64 bg-olive-900 border-r border-olive-800 flex flex-col">
         <div className="p-8">
-          <div className="flex items-center gap-3 mb-10">
-            <div className="w-10 h-10 bg-olive-600 rounded-lg flex items-center justify-center font-bold text-xl shadow-lg shadow-olive-500/20">
-              <Wallet className="text-white w-6 h-6" />
+          <div className="flex flex-col gap-3 mb-10">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-olive-950 border border-olive-800 rounded-lg flex items-center justify-center font-bold text-xl shadow-lg">
+                <svg viewBox="0 0 24 24" className="w-6 h-6 text-yellow-400 fill-yellow-400">
+                  <path d="M12 1L14.39 8.26H22L15.81 12.75L18.19 20L12 15.5L5.81 20L8.19 12.75L2 8.26H9.61L12 1Z" />
+                </svg>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-black text-xs tracking-[0.2em] uppercase text-white leading-tight italic">Estratégia</span>
+                <span className="font-medium text-[10px] tracking-[0.3em] uppercase text-olive-500 leading-tight">Consultoria</span>
+              </div>
             </div>
-            <span className="font-bold text-xl tracking-tight italic">FinLink <span className="text-olive-500 font-normal text-sm not-italic ml-2">v2.4</span></span>
+            <div className="h-[1px] w-full bg-gradient-to-r from-olive-800 to-transparent"></div>
           </div>
 
           <nav className="space-y-1">
