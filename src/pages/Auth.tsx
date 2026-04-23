@@ -61,7 +61,7 @@ export const Auth: React.FC = () => {
         layout
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-md w-full bg-white rounded-[2.5rem] p-10 shadow-2xl shadow-indigo-100/50 border border-[#E5E5E5]"
+        className="max-w-md w-full bg-white rounded-[2.5rem] p-10 shadow-2xl shadow-olive-100/50 border border-[#E5E5E5]"
       >
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-[#1A1A1A] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
@@ -99,7 +99,7 @@ export const Auth: React.FC = () => {
                 className="space-y-4 overflow-hidden"
               >
                 <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-olive-400" />
                   <input
                     type="text"
                     placeholder="Seu nome completo"
@@ -117,7 +117,7 @@ export const Auth: React.FC = () => {
                     className={`p-4 rounded-2xl border-2 transition-all flex flex-col items-center gap-2 ${
                       role === 'user' 
                         ? 'border-[#1A1A1A] bg-[#1A1A1A] text-white' 
-                        : 'border-[#EEEEEE] text-slate-400 hover:border-slate-300'
+                        : 'border-[#EEEEEE] text-olive-400 hover:border-olive-300'
                     }`}
                   >
                     <User className="w-6 h-6" />
@@ -128,15 +128,15 @@ export const Auth: React.FC = () => {
                     onClick={() => setRole('admin')}
                     className={`p-4 rounded-2xl border-2 transition-all flex flex-col items-center gap-2 ${
                       role === 'admin' 
-                        ? 'border-indigo-600 bg-indigo-600 text-white shadow-lg shadow-indigo-900/20' 
-                        : 'border-[#EEEEEE] text-slate-400 hover:border-slate-300'
+                        ? 'border-olive-600 bg-olive-600 text-white shadow-lg shadow-olive-900/20' 
+                        : 'border-[#EEEEEE] text-olive-400 hover:border-olive-300'
                     }`}
                   >
                     <ShieldCheck className="w-6 h-6" />
                     <span className="text-[10px] font-black uppercase tracking-widest">Administrador</span>
                   </button>
                 </div>
-                <p className="text-[10px] text-slate-400 text-center font-bold px-4">
+                <p className="text-[10px] text-olive-400 text-center font-bold px-4">
                   * Administradores podem gerenciar usuários e planejar orçamentos globais.
                 </p>
               </motion.div>
@@ -144,7 +144,7 @@ export const Auth: React.FC = () => {
           </AnimatePresence>
 
           <div className="relative">
-            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-olive-400" />
             <input
               type="email"
               placeholder="E-mail"
@@ -156,7 +156,7 @@ export const Auth: React.FC = () => {
           </div>
 
           <div className="relative">
-            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-olive-400" />
             <input
               type="password"
               placeholder="Senha"
@@ -185,7 +185,7 @@ export const Auth: React.FC = () => {
 
         <div className="mt-8 flex items-center gap-4">
           <div className="h-[1px] bg-[#EEEEEE] flex-1" />
-          <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Ou continue com</span>
+          <span className="text-[10px] font-black text-olive-400 uppercase tracking-widest">Ou continue com</span>
           <div className="h-[1px] bg-[#EEEEEE] flex-1" />
         </div>
 

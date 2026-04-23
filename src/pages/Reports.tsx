@@ -64,16 +64,16 @@ export const Reports: React.FC = () => {
     <div className="space-y-10 pb-20">
       {/* Header Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="md:col-span-2 bg-slate-900 p-8 rounded-[2rem] border border-slate-800 shadow-xl overflow-hidden relative group">
+        <div className="md:col-span-2 bg-olive-900 p-8 rounded-[2rem] border border-olive-800 shadow-xl overflow-hidden relative group">
            <div className="relative z-10">
-              <h3 className="text-sm font-bold text-slate-500 uppercase tracking-widest mb-4">Eficiência de Caixa</h3>
+              <h3 className="text-sm font-bold text-olive-500 uppercase tracking-widest mb-4">Eficiência de Caixa</h3>
               <div className="flex items-end gap-2">
                 <p className="text-4xl font-black text-white italic">Fluxo de Caixa</p>
-                <div className="mb-2 w-1.5 h-1.5 bg-indigo-500 rounded-full animate-ping"></div>
+                <div className="mb-2 w-1.5 h-1.5 bg-olive-500 rounded-full animate-ping"></div>
               </div>
-              <p className="text-xs text-slate-400 mt-4 max-w-xs italic leading-relaxed">Seu resumo consolidado de entradas e saídas processadas pela nossa engine financeira.</p>
+              <p className="text-xs text-olive-400 mt-4 max-w-xs italic leading-relaxed">Seu resumo consolidado de entradas e saídas processadas pela nossa engine financeira.</p>
            </div>
-           <div className="absolute right-0 top-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl -mr-20 -mt-20 group-hover:bg-indigo-600/20 transition-all duration-700"></div>
+           <div className="absolute right-0 top-0 w-64 h-64 bg-olive-600/10 rounded-full blur-3xl -mr-20 -mt-20 group-hover:bg-olive-600/20 transition-all duration-700"></div>
         </div>
 
         <div className="bg-emerald-500/5 border border-emerald-500/10 p-8 rounded-[2rem] shadow-xl">
@@ -99,20 +99,20 @@ export const Reports: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Chart */}
-        <div className="lg:col-span-2 bg-slate-900 p-8 rounded-[2.5rem] border border-slate-800 shadow-xl">
+        <div className="lg:col-span-2 bg-olive-900 p-8 rounded-[2.5rem] border border-olive-800 shadow-xl">
            <div className="flex items-center justify-between mb-10">
               <h3 className="text-lg font-bold text-white flex items-center gap-3 italic">
-                <Calendar className="w-5 h-5 text-indigo-400" />
+                <Calendar className="w-5 h-5 text-olive-400" />
                 Variação Mensal
               </h3>
               <div className="flex gap-2">
-                 <div className="flex items-center gap-2 px-3 py-1 bg-slate-950 rounded-lg border border-slate-800">
+                 <div className="flex items-center gap-2 px-3 py-1 bg-olive-950 rounded-lg border border-olive-800">
                     <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
-                    <span className="text-[10px] font-bold uppercase text-slate-500">Receitas</span>
+                    <span className="text-[10px] font-bold uppercase text-olive-500">Receitas</span>
                  </div>
-                 <div className="flex items-center gap-2 px-3 py-1 bg-slate-950 rounded-lg border border-slate-800">
+                 <div className="flex items-center gap-2 px-3 py-1 bg-olive-950 rounded-lg border border-olive-800">
                     <span className="w-2 h-2 bg-rose-500 rounded-full"></span>
-                    <span className="text-[10px] font-bold uppercase text-slate-500">Despesas</span>
+                    <span className="text-[10px] font-bold uppercase text-olive-500">Despesas</span>
                  </div>
               </div>
            </div>
@@ -130,13 +130,13 @@ export const Reports: React.FC = () => {
                       <stop offset="95%" stopColor="#f43f5e" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
-                  <XAxis dataKey="name" stroke="#64748b" fontSize={10} axisLine={false} tickLine={false} />
-                  <YAxis stroke="#64748b" fontSize={10} axisLine={false} tickLine={false} tickFormatter={(val) => `R$${val}`} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#3f6212" vertical={false} />
+                  <XAxis dataKey="name" stroke="#65a30d" fontSize={10} axisLine={false} tickLine={false} />
+                  <YAxis stroke="#65a30d" fontSize={10} axisLine={false} tickLine={false} tickFormatter={(val) => `R$${val}`} />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px', fontSize: '12px' }}
+                    contentStyle={{ backgroundColor: '#1a2e05', border: '1px solid #3f6212', borderRadius: '12px', fontSize: '12px' }}
                     itemStyle={{ fontWeight: 'bold' }}
-                    cursor={{ stroke: '#334155', strokeWidth: 1 }}
+                    cursor={{ stroke: '#4d7c0f', strokeWidth: 1 }}
                   />
                   <Area type="monotone" dataKey="income" stroke="#10b981" fillOpacity={1} fill="url(#colorIncome)" strokeWidth={3} strokeLinecap="round" />
                   <Area type="monotone" dataKey="expense" stroke="#f43f5e" fillOpacity={1} fill="url(#colorExpense)" strokeWidth={3} strokeLinecap="round" />
@@ -146,9 +146,9 @@ export const Reports: React.FC = () => {
         </div>
 
         {/* Pie Chart */}
-        <div className="lg:col-span-1 bg-slate-900 p-8 rounded-[2.5rem] border border-slate-800 shadow-xl">
+        <div className="lg:col-span-1 bg-olive-900 p-8 rounded-[2.5rem] border border-olive-800 shadow-xl">
            <h3 className="text-lg font-bold text-white mb-10 flex items-center gap-3 italic">
-             <Filter className="w-5 h-5 text-indigo-400" />
+             <Filter className="w-5 h-5 text-olive-400" />
              Mix de Despesas
            </h3>
            <div className="h-[250px] w-full">
@@ -168,7 +168,7 @@ export const Reports: React.FC = () => {
                     ))}
                   </Pie>
                   <Tooltip 
-                    contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px', fontSize: '10px' }}
+                    contentStyle={{ backgroundColor: '#1a2e05', border: '1px solid #3f6212', borderRadius: '12px', fontSize: '10px' }}
                   />
                 </PieChart>
               </ResponsiveContainer>
@@ -179,7 +179,7 @@ export const Reports: React.FC = () => {
                 <div key={cat.name} className="flex items-center justify-between">
                    <div className="flex items-center gap-2">
                       <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: COLORS[i % COLORS.length] }}></div>
-                      <span className="text-xs font-bold text-slate-400 capitalize">{cat.name}</span>
+                      <span className="text-xs font-bold text-olive-400 capitalize">{cat.name}</span>
                    </div>
                    <span className="text-xs font-black text-white">{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(cat.value)}</span>
                 </div>

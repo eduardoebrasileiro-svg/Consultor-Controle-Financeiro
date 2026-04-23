@@ -45,6 +45,13 @@ export interface UserProfile {
   role: 'user' | 'admin';
   adminId?: string;
   createdAt: any;
+  onboardingAnswers?: {
+    financialGoal: string;
+    investmentAmount: string;
+    advisoryPreference: string;
+    interactionMode: string;
+    completedAt: any;
+  };
 }
 
 export interface Transaction {

@@ -103,16 +103,16 @@ export const AdminDashboard: React.FC = () => {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
                 <h3 className="text-3xl font-black tracking-tighter text-white">Central de Supervisão</h3>
-                <p className="text-slate-500 font-bold uppercase text-[10px] tracking-[0.2em] mt-1">Gestão de Subordinados FinLink</p>
+                <p className="text-olive-500 font-bold uppercase text-[10px] tracking-[0.2em] mt-1">Gestão de Subordinados FinLink</p>
               </div>
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-olive-500" />
                 <input 
                   type="text" 
                   placeholder="Buscar por nome ou email..." 
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="bg-slate-900 border border-slate-800 text-white pl-12 pr-6 py-3 rounded-2xl w-full md:w-80 focus:ring-2 focus:ring-indigo-500 outline-none font-medium text-sm transition-all shadow-xl"
+                  className="bg-olive-900 border border-olive-800 text-white pl-12 pr-6 py-3 rounded-2xl w-full md:w-80 focus:ring-2 focus:ring-olive-500 outline-none font-medium text-sm transition-all shadow-xl"
                 />
               </div>
             </div>
@@ -120,26 +120,26 @@ export const AdminDashboard: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredUsers.map((u) => (
                 <button
-                  key={u.uid}
-                  onClick={() => setSelectedUser(u)}
-                  className="bg-slate-900 p-8 rounded-[2.5rem] border border-slate-800 text-left hover:border-indigo-500/50 hover:bg-slate-900/50 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all group relative overflow-hidden"
+                   key={u.uid}
+                   onClick={() => setSelectedUser(u)}
+                   className="bg-olive-900 p-8 rounded-[2.5rem] border border-olive-800 text-left hover:border-olive-500/50 hover:bg-olive-900/50 hover:shadow-2xl hover:shadow-olive-500/10 transition-all group relative overflow-hidden"
                 >
                   <div className="flex items-center gap-4 mb-8">
-                    <div className="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-xl font-black text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                    <div className="w-14 h-14 rounded-2xl bg-olive-500/10 border border-olive-500/20 flex items-center justify-center text-xl font-black text-olive-400 group-hover:bg-olive-600 group-hover:text-white transition-all duration-300">
                       {u.displayName.charAt(0)}
                     </div>
                     <div>
                       <p className="font-bold text-lg text-white leading-none mb-1">{u.displayName}</p>
-                      <p className="text-xs text-slate-500 font-medium italic">{u.email}</p>
+                      <p className="text-xs text-olive-500 font-medium italic">{u.email}</p>
                     </div>
                   </div>
                   
-                  <div className="flex items-center justify-between pt-4 border-t border-slate-800">
-                    <div className="flex items-center gap-2 text-[8px] font-black text-slate-500 tracking-[0.2em] uppercase">
+                  <div className="flex items-center justify-between pt-4 border-t border-olive-800">
+                    <div className="flex items-center gap-2 text-[8px] font-black text-olive-500 tracking-[0.2em] uppercase">
                       <Shield className="w-3 h-3 text-emerald-500" />
                       Status Operacional
                     </div>
-                    <div className="flex items-center gap-2 text-indigo-400 font-bold text-[10px] tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex items-center gap-2 text-olive-400 font-bold text-[10px] tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">
                         Ver Detalhes
                         <ArrowRight className="w-4 h-4" />
                     </div>
@@ -158,9 +158,9 @@ export const AdminDashboard: React.FC = () => {
           >
             <button 
               onClick={() => setSelectedUser(null)}
-              className="flex items-center gap-2 font-bold text-slate-500 hover:text-white transition-colors group"
+              className="flex items-center gap-2 font-bold text-olive-500 hover:text-white transition-colors group"
             >
-              <div className="p-2 bg-slate-900 rounded-lg group-hover:bg-slate-800 transition-colors">
+              <div className="p-2 bg-olive-900 rounded-lg group-hover:bg-olive-800 transition-colors">
                 <ChevronLeft className="w-5 h-5" />
               </div>
               <span className="text-xs uppercase tracking-widest">Retornar à Central</span>
@@ -169,30 +169,30 @@ export const AdminDashboard: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* User Overview & Transactions */}
               <div className="lg:col-span-2 space-y-8">
-                <div className="bg-slate-900 p-10 rounded-[2.5rem] border border-slate-800 flex items-center justify-between shadow-xl">
+                <div className="bg-olive-900 p-10 rounded-[2.5rem] border border-olive-800 flex items-center justify-between shadow-xl">
                   <div className="flex items-center gap-6">
-                    <div className="w-20 h-20 rounded-[1.5rem] bg-indigo-600 text-white flex items-center justify-center text-3xl font-black shadow-lg shadow-indigo-500/20">
+                    <div className="w-20 h-20 rounded-[1.5rem] bg-olive-600 text-white flex items-center justify-center text-3xl font-black shadow-lg shadow-olive-500/20">
                       {selectedUser.displayName.charAt(0)}
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold text-white leading-none mb-2">{selectedUser.displayName}</h3>
-                      <p className="text-sm text-slate-500 italic">{selectedUser.email}</p>
+                      <p className="text-sm text-olive-500 italic">{selectedUser.email}</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1 leading-none">Score de Atividade</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-olive-500 mb-1 leading-none">Score de Atividade</p>
                     <p className="text-4xl font-black tracking-tighter text-white">{userTransactions.length}</p>
                   </div>
                 </div>
 
-                <div className="bg-slate-900 rounded-[2.5rem] border border-slate-800 overflow-hidden shadow-xl">
-                  <div className="p-8 border-b border-slate-800 flex items-center justify-between">
+                <div className="bg-olive-900 rounded-[2.5rem] border border-olive-800 overflow-hidden shadow-xl">
+                  <div className="p-8 border-b border-olive-800 flex items-center justify-between">
                       <h3 className="font-bold text-lg text-white">Extrato Consolidado</h3>
-                      <div className="px-3 py-1 bg-slate-800 rounded-full border border-slate-700 text-[8px] font-black uppercase tracking-widest text-slate-500">Fluxo de Caixa</div>
+                      <div className="px-3 py-1 bg-olive-800 rounded-full border border-olive-700 text-[8px] font-black uppercase tracking-widest text-olive-500">Fluxo de Caixa</div>
                   </div>
-                  <div className="max-h-[500px] overflow-y-auto divide-y divide-slate-800">
+                  <div className="max-h-[500px] overflow-y-auto divide-y divide-olive-800">
                     {userTransactions.map(t => (
-                      <div key={t.id} className="p-6 flex items-center justify-between hover:bg-slate-800/30 transition-colors group">
+                      <div key={t.id} className="p-6 flex items-center justify-between hover:bg-olive-800/30 transition-colors group">
                         <div className="flex items-center gap-4">
                           <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold ${
                             t.type === 'income' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'
@@ -200,8 +200,8 @@ export const AdminDashboard: React.FC = () => {
                             {t.category.substring(0, 2).toUpperCase()}
                           </div>
                           <div>
-                            <p className="font-bold text-sm text-slate-200 italic">{t.description}</p>
-                            <p className="text-[10px] text-slate-500 uppercase font-black tracking-widest mt-1 bg-slate-950/50 px-1.5 py-0.5 rounded w-fit">{t.category}</p>
+                            <p className="font-bold text-sm text-olive-200 italic">{t.description}</p>
+                            <p className="text-[10px] text-olive-500 uppercase font-black tracking-widest mt-1 bg-olive-950/50 px-1.5 py-0.5 rounded w-fit">{t.category}</p>
                           </div>
                         </div>
                         <p className={`font-bold text-lg ${t.type === 'income' ? 'text-emerald-500' : 'text-rose-500'}`}>
@@ -215,30 +215,30 @@ export const AdminDashboard: React.FC = () => {
 
               {/* Edit Planning */}
               <div className="lg:col-span-1 space-y-8">
-                <div className="bg-slate-900 p-10 rounded-[2.5rem] border border-slate-800 shadow-2xl shadow-indigo-900/10">
+                <div className="bg-olive-900 p-10 rounded-[2.5rem] border border-olive-800 shadow-2xl shadow-olive-900/10">
                   <h3 className="text-xl font-bold mb-8 flex items-center gap-3 text-white italic">
-                    <Edit3 className="w-5 h-5 text-indigo-400" />
+                    <Edit3 className="w-5 h-5 text-olive-400" />
                     Ajuste Diretivo
                   </h3>
                   
                   <div className="space-y-6">
                     <div className="space-y-2">
-                       <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Teto Orçamentário</label>
+                       <label className="text-[10px] font-black uppercase tracking-[0.2em] text-olive-500">Teto Orçamentário</label>
                        <input 
                         type="number" 
                         value={budgetLimit}
                         onChange={(e) => setBudgetLimit(Number(e.target.value))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-5 font-bold text-xl text-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all" 
+                        className="w-full bg-olive-950 border border-olive-800 rounded-2xl p-5 font-bold text-xl text-white focus:ring-2 focus:ring-olive-500 outline-none transition-all" 
                         placeholder="0.00"
                        />
                     </div>
 
                     <div className="space-y-2">
-                       <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Instruções de Auditoria</label>
+                       <label className="text-[10px] font-black uppercase tracking-[0.2em] text-olive-500">Instruções de Auditoria</label>
                        <textarea 
                         value={adminInstructions}
                         onChange={(e) => setAdminInstructions(e.target.value)}
-                        className="w-full h-48 bg-slate-950 border border-slate-800 rounded-2xl p-6 font-medium text-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none resize-none leading-relaxed italic"
+                        className="w-full h-48 bg-olive-950 border border-olive-800 rounded-2xl p-6 font-medium text-olive-300 focus:ring-2 focus:ring-olive-500 outline-none resize-none leading-relaxed italic"
                         placeholder="Ex: Priorize reduzir gastos operacionais..."
                        ></textarea>
                     </div>
@@ -246,7 +246,7 @@ export const AdminDashboard: React.FC = () => {
                     <button 
                       onClick={handleUpdatePlanning}
                       disabled={isSaving}
-                      className="w-full bg-indigo-600 text-white py-5 rounded-2xl font-bold text-sm tracking-widest hover:bg-indigo-700 transition-all flex items-center justify-center gap-3 shadow-xl shadow-indigo-900/20 active:scale-95"
+                      className="w-full bg-olive-600 text-white py-5 rounded-2xl font-bold text-sm tracking-widest hover:bg-olive-700 transition-all flex items-center justify-center gap-3 shadow-xl shadow-olive-900/20 active:scale-95"
                     >
                       <Save className="w-5 h-5" />
                       {isSaving ? 'PROCESSANDO...' : 'ATUALIZAR DIRETIVA'}
@@ -255,13 +255,13 @@ export const AdminDashboard: React.FC = () => {
                 </div>
 
                 {/* User Notes Review */}
-                <div className="bg-slate-950 p-10 rounded-[2.5rem] border border-slate-800">
-                  <h3 className="text-sm font-bold mb-6 flex items-center gap-3 uppercase tracking-widest text-slate-400">
+                <div className="bg-olive-950 p-10 rounded-[2.5rem] border border-olive-800">
+                  <h3 className="text-sm font-bold mb-6 flex items-center gap-3 uppercase tracking-widest text-olive-400">
                     <MessageSquare className="w-4 h-4 text-emerald-400" />
                     Resposta do Usuário
                   </h3>
-                  <div className="p-6 bg-slate-900 rounded-2xl border border-slate-800 border-l-4 border-slate-500">
-                    <p className="text-xs leading-relaxed text-slate-400 italic">
+                  <div className="p-6 bg-olive-900 rounded-2xl border border-olive-800 border-l-4 border-olive-500">
+                    <p className="text-xs leading-relaxed text-olive-400 italic">
                       {userPlanning?.userNotes ? `"${userPlanning.userNotes}"` : "Aguardando posicionamento do usuário subordinado."}
                     </p>
                   </div>

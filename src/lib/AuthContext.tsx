@@ -7,7 +7,7 @@ import {
   updateProfile,
   signOut
 } from 'firebase/auth';
-import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, getDoc, setDoc, serverTimestamp, onSnapshot } from 'firebase/firestore';
 import { auth, db, UserProfile } from './firebase';
 
 interface AuthContextType {
@@ -34,42 +34,59 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+    let unsubscribeProfile: (() => void) | null = null;
+
+    const unsubscribeAuth = onAuthStateChanged(auth, async (firebaseUser) => {
       try {
         setLoading(true);
         setUser(firebaseUser);
         
+        if (unsubscribeProfile) {
+          unsubscribeProfile();
+          unsubscribeProfile = null;
+        }
+
         if (firebaseUser) {
           const userRef = doc(db, 'users', firebaseUser.uid);
-          const userDoc = await getDoc(userRef);
           
-          if (userDoc.exists()) {
-            setProfile(userDoc.data() as UserProfile);
-          } else {
-            // Auto-create profile if missing and it's not a registration in progress
-            // (Standard social login or edge cases)
-            const isInitialAdmin = firebaseUser.email === 'eduardo.ebrasileiro@gmail.com';
-            const newProfile: UserProfile = {
-              uid: firebaseUser.uid,
-              email: firebaseUser.email || '',
-              displayName: firebaseUser.displayName || 'Usuário',
-              role: isInitialAdmin ? 'admin' : 'user',
-              createdAt: serverTimestamp()
-            };
-            await setDoc(userRef, newProfile);
-            setProfile(newProfile);
-          }
+          unsubscribeProfile = onSnapshot(userRef, (snapshot) => {
+            if (snapshot.exists()) {
+              setProfile(snapshot.data() as UserProfile);
+              setLoading(false);
+            } else {
+              // Creating profile happens the first time
+              const createProfile = async () => {
+                const isInitialAdmin = firebaseUser.email === 'eduardo.ebrasileiro@gmail.com';
+                const newProfile: UserProfile = {
+                  uid: firebaseUser.uid,
+                  email: firebaseUser.email || '',
+                  displayName: firebaseUser.displayName || 'Usuário',
+                  role: isInitialAdmin ? 'admin' : 'user',
+                  createdAt: serverTimestamp()
+                };
+                await setDoc(userRef, newProfile);
+                // The snapshot listener above will trigger setProfile
+              };
+              createProfile();
+            }
+          }, (error) => {
+            console.error("Profile subscription error:", error);
+            setLoading(false);
+          });
         } else {
           setProfile(null);
+          setLoading(false);
         }
       } catch (error) {
         console.error("Auth initialization error:", error);
-      } finally {
         setLoading(false);
       }
     });
 
-    return () => unsubscribe();
+    return () => {
+      unsubscribeAuth();
+      if (unsubscribeProfile) unsubscribeProfile();
+    };
   }, []);
 
   return (
