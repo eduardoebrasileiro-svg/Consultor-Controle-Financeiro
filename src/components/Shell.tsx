@@ -15,7 +15,6 @@ import {
   MessageSquare
 } from 'lucide-react';
 import { useAuth } from '../lib/AuthContext';
-import { logout } from '../lib/firebase';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface ShellProps {
@@ -25,7 +24,7 @@ interface ShellProps {
 }
 
 export const Shell: React.FC<ShellProps> = ({ children, activeTab, setActiveTab }) => {
-  const { profile } = useAuth();
+  const { profile, logout } = useAuth();
   const isAdmin = profile?.role === 'admin';
 
   const menuItems = [
