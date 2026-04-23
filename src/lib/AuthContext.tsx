@@ -35,42 +35,38 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      setLoading(true);
-      setUser(firebaseUser);
-      
-      if (firebaseUser) {
-        const userRef = doc(db, 'users', firebaseUser.uid);
-        const userDoc = await getDoc(userRef);
+      try {
+        setLoading(true);
+        setUser(firebaseUser);
         
-        if (userDoc.exists()) {
-          setProfile(userDoc.data() as UserProfile);
+        if (firebaseUser) {
+          const userRef = doc(db, 'users', firebaseUser.uid);
+          const userDoc = await getDoc(userRef);
+          
+          if (userDoc.exists()) {
+            setProfile(userDoc.data() as UserProfile);
+          } else {
+            // Auto-create profile if missing and it's not a registration in progress
+            // (Standard social login or edge cases)
+            const isInitialAdmin = firebaseUser.email === 'eduardo.ebrasileiro@gmail.com';
+            const newProfile: UserProfile = {
+              uid: firebaseUser.uid,
+              email: firebaseUser.email || '',
+              displayName: firebaseUser.displayName || 'Usuário',
+              role: isInitialAdmin ? 'admin' : 'user',
+              createdAt: serverTimestamp()
+            };
+            await setDoc(userRef, newProfile);
+            setProfile(newProfile);
+          }
         } else {
-          // Check if this was a social login or email login without profile
-          // We wait a bit or just create a default one if it's social
-          // For email registration, the registration logic handles setDoc
-          // If after a short delay doc still doesn't exist, create default
-          setTimeout(async () => {
-             const reCheck = await getDoc(userRef);
-             if (!reCheck.exists()) {
-                const isInitialAdmin = firebaseUser.email === 'eduardo.ebrasileiro@gmail.com';
-                const newProfile: UserProfile = {
-                  uid: firebaseUser.uid,
-                  email: firebaseUser.email || '',
-                  displayName: firebaseUser.displayName || 'Usuário',
-                  role: isInitialAdmin ? 'admin' : 'user',
-                  createdAt: serverTimestamp()
-                };
-                await setDoc(userRef, newProfile);
-                setProfile(newProfile);
-             } else {
-                setProfile(reCheck.data() as UserProfile);
-             }
-          }, 1000);
+          setProfile(null);
         }
-      } else {
-        setProfile(null);
+      } catch (error) {
+        console.error("Auth initialization error:", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return () => unsubscribe();
