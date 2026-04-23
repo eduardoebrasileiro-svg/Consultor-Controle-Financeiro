@@ -1,0 +1,123 @@
+import React, { useState } from 'react';
+import { 
+  BarChart3, 
+  PlusCircle, 
+  TrendingUp, 
+  TrendingDown, 
+  Calendar, 
+  Users, 
+  LogOut, 
+  Wallet,
+  Settings,
+  Bell,
+  Target,
+  PieChart as BarChartHorizontal,
+  MessageSquare
+} from 'lucide-react';
+import { useAuth } from '../lib/AuthContext';
+import { logout } from '../lib/firebase';
+import { motion, AnimatePresence } from 'motion/react';
+
+interface ShellProps {
+  children: React.ReactNode;
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+}
+
+export const Shell: React.FC<ShellProps> = ({ children, activeTab, setActiveTab }) => {
+  const { profile } = useAuth();
+  const isAdmin = profile?.role === 'admin';
+
+  const menuItems = [
+    { id: 'dashboard', icon: BarChart3, label: 'Dashboard', roles: ['user', 'admin'] },
+    { id: 'reports', icon: BarChartHorizontal, label: 'Relatórios', roles: ['user', 'admin'] },
+    { id: 'goals', icon: Target, label: 'Metas & Orçamentos', roles: ['user', 'admin'] },
+    { id: 'planning', icon: Calendar, label: 'Planejamento', roles: ['user', 'admin'] },
+    ...(isAdmin ? [{ id: 'admin', icon: Users, label: 'Gestão', roles: ['admin'] }] : [])
+  ];
+
+  return (
+    <div className="flex h-screen bg-slate-950 overflow-hidden font-sans text-slate-100">
+      {/* Sidebar */}
+      <aside className="w-64 bg-slate-900 border-r border-slate-800 flex flex-col">
+        <div className="p-8">
+          <div className="flex items-center gap-3 mb-10">
+            <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center font-bold text-xl shadow-lg shadow-indigo-500/20">
+              <Wallet className="text-white w-6 h-6" />
+            </div>
+            <span className="font-bold text-xl tracking-tight italic">FinLink <span className="text-slate-500 font-normal text-sm not-italic ml-2">v2.4</span></span>
+          </div>
+
+          <nav className="space-y-1">
+            {menuItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => setActiveTab(item.id)}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
+                  activeTab === item.id 
+                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/10' 
+                  : 'text-slate-400 hover:bg-slate-800 hover:text-slate-100'
+                }`}
+              >
+                <item.icon className="w-5 h-5" />
+                <span className="font-medium">{item.label}</span>
+              </button>
+            ))}
+          </nav>
+        </div>
+
+        <div className="mt-auto p-6 border-t border-slate-800">
+          <div className="flex items-center gap-3 px-2 mb-4">
+            <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-bold uppercase overflow-hidden">
+              {profile?.displayName?.charAt(0)}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium leading-none truncate">{profile?.displayName}</p>
+              <p className="text-[10px] text-slate-400 leading-none mt-1 uppercase tracking-widest">{profile?.role}</p>
+            </div>
+          </div>
+          <button 
+            onClick={logout}
+            className="w-full flex items-center gap-3 px-4 py-2 text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors font-medium text-sm"
+          >
+            <LogOut className="w-4 h-4" />
+            Sair
+          </button>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex-1 flex flex-col overflow-hidden">
+        <header className="h-20 border-b border-slate-800 px-10 flex items-center justify-between bg-slate-950/50 backdrop-blur-sm z-10">
+          <h2 className="text-2xl font-bold tracking-tight text-white">
+            {menuItems.find(i => i.id === activeTab)?.label}
+          </h2>
+          <div className="flex items-center gap-6">
+            <div className="px-3 py-1 bg-slate-800 rounded-full border border-slate-700 text-[10px] flex items-center gap-2 font-medium text-slate-300">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> {isAdmin ? 'Admin Conectado' : 'Usuário Online'}: {profile?.displayName}
+            </div>
+            <button className="p-2 hover:bg-slate-800 rounded-full transition-colors relative">
+              <Bell className="w-5 h-5 text-slate-400" />
+              <span className="absolute top-2.5 right-2.5 w-1.5 h-1.5 bg-indigo-500 rounded-full border-2 border-slate-950"></span>
+            </button>
+          </div>
+        </header>
+
+        <section className="flex-1 overflow-y-auto p-10 bg-slate-950">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="max-w-7xl mx-auto"
+            >
+              {children}
+            </motion.div>
+          </AnimatePresence>
+        </section>
+      </main>
+    </div>
+  );
+};

@@ -1,0 +1,172 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User profile information and role management.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "adminId": { "type": "string", "description": "The UID of the admin managing this user." },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Transaction": {
+      "title": "Financial Transaction",
+      "description": "Incomes and expenses recorded by the user.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "type": { "type": "string", "enum": ["income", "expense"] },
+        "category": { "type": "string" },
+        "amount": { "type": "number" },
+        "description": { "type": "string" },
+        "paymentMethod": { "type": "string", "enum": ["Carteira", "Banco", "Cartão de Crédito"] },
+        "account": { "type": "string", "description": "Specific account name like 'Santander' or 'Nubank'." },
+        "creditCardId": { "type": "string", "description": "Reference to a CreditCard if applicable." },
+        "installments": { "type": "number", "description": "Total number of installments." },
+        "installmentIndex": { "type": "number", "description": "Current installment number (1-based)." },
+        "installmentId": { "type": "string", "description": "ID to group installments of the same purchase." },
+        "date": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "type", "amount", "date", "paymentMethod"]
+    },
+    "Goal": {
+      "title": "Saving Goal",
+      "description": "Savings targets with deadlines.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "targetAmount": { "type": "number" },
+        "currentAmount": { "type": "number" },
+        "deadline": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "targetAmount", "deadline"]
+    },
+    "CategoryBudget": {
+      "title": "Category Budget",
+      "description": "Monthly budget limits per category.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "category": { "type": "string" },
+        "limit": { "type": "number" },
+        "month": { "type": "string", "description": "Format YYYY-MM" }
+      },
+      "required": ["userId", "category", "limit", "month"]
+    },
+    "Reminder": {
+      "title": "Financial Reminder",
+      "description": "Reminders for bills and goals.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "type": { "type": "string", "enum": ["bill", "goal", "custom"] },
+        "completed": { "type": "boolean" }
+      },
+      "required": ["userId", "title", "date", "type", "completed"]
+    },
+    "Account": {
+      "title": "Financial Account",
+      "description": "User bank accounts or wallets.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["Banco", "Carteira", "Cartão de Crédito"] },
+        "initialBalance": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "type", "initialBalance"]
+    },
+    "Category": {
+      "title": "Transaction Category",
+      "description": "User defined categories for transactions.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["income", "expense"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "type"]
+    },
+    "CreditCard": {
+      "title": "Credit Card",
+      "description": "User credit cards linked to bank accounts.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "bankAccountId": { "type": "string" },
+        "name": { "type": "string" },
+        "brand": { "type": "string", "enum": ["Visa", "Mastercard", "Elo", "Amex", "Outro"] },
+        "lastDigits": { "type": "string" },
+        "totalLimit": { "type": "number" },
+        "closingDay": { "type": "number" },
+        "dueDay": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "bankAccountId", "name", "totalLimit", "closingDay"]
+    },
+    "Planning": {
+      "title": "Financial Planning",
+      "description": "Monthly budget goals and instructions from the admin.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "month": { "type": "string", "description": "Format YYYY-MM" },
+        "budgetLimit": { "type": "number" },
+        "adminInstructions": { "type": "string" },
+        "userNotes": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "month"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles and role settings."
+    },
+    "/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "User income and expense logs."
+    },
+    "/planning/{planningId}": {
+      "schema": "Planning",
+      "description": "Monthly planning and admin feedback."
+    },
+    "/goals/{goalId}": {
+      "schema": "Goal",
+      "description": "User savings goals."
+    },
+    "/budgets/{budgetId}": {
+      "schema": "CategoryBudget",
+      "description": "Monthly category budgets."
+    },
+    "/reminders/{reminderId}": {
+      "schema": "Reminder",
+      "description": "User notifications and reminders."
+    },
+    "/accounts/{accountId}": {
+      "schema": "Account",
+      "description": "User financial accounts."
+    },
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "User financial categories."
+    },
+    "/creditCards/{cardId}": {
+      "schema": "CreditCard",
+      "description": "User credit cards."
+    }
+  }
+}
